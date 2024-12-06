@@ -1,4 +1,5 @@
 package org.example.schedule.controller;
 
-public class Controller {
+public class ScheduleController {
+
 }
