@@ -7,9 +7,8 @@ import java.time.LocalDateTime;
 @Getter
 public class ScheduleRequestDto {
 
-    private Long id;
+    private String authorname;
     private String worktodo;
-    private String Authorname;
     private Long password;
 
 }
