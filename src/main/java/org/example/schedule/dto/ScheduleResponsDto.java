@@ -11,7 +11,7 @@ public class ScheduleResponsDto {
     private Long id;
     private String authorname;
     private String worktodo;
-    private LocalDateTime createdDateTime;
+    private String createdDateTime;
 
     public ScheduleResponsDto(Schedule schedule) {
         this.id = schedule.getId();

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,9 +29,11 @@ public class ScheduleController {
 
         //날짜 생성
         LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter dateTimeNow = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm시 ss초");
+        String todayTimeNow = dateTime.format(dateTimeNow);
 
         //Schecule 객체 생성
-        Schedule schedule = new Schedule(todoid,requestDto.getAuthorname(),requestDto.getWorktodo(),requestDto.getPassword(),dateTime);
+        Schedule schedule = new Schedule(todoid,requestDto.getAuthorname(),requestDto.getWorktodo(),requestDto.getPassword(),todayTimeNow);
 
         //todoList에 Schecule 넣어주기
         todoList.put(todoid,schedule);

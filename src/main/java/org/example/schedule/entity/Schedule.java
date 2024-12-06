@@ -13,6 +13,6 @@ public class Schedule {
     private String Authorname;
     private String worktodo;
     private Long password;
-    private LocalDateTime createdDateTime;
+    private String createdDateTime;
 
 }
