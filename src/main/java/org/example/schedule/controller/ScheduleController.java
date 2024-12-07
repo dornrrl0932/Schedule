@@ -3,10 +3,7 @@ package org.example.schedule.controller;
 import org.example.schedule.dto.ScheduleRequestDto;
 import org.example.schedule.dto.ScheduleResponsDto;
 import org.example.schedule.entity.Schedule;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -27,7 +24,7 @@ public class ScheduleController {
         //id 생성
         Long todoid = todoList.isEmpty() ? 1 : Collections.max(todoList.keySet()) + 1;
 
-        //날짜 생성
+        //작성 날짜, 생성
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter dateTimeNow = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm시 ss초");
         String todayTimeNow = dateTime.format(dateTimeNow);
@@ -41,6 +38,16 @@ public class ScheduleController {
         //리턴
         return new ScheduleResponsDto(schedule);
 
+    }
+
+    @GetMapping("/{id}")
+    public ScheduleResponsDto lookupTodoId (@PathVariable Long id) {
+
+        //받아온 id로 todo 조회
+        Schedule schedule = todoList.get(id);
+
+        //리턴
+        return new ScheduleResponsDto(schedule);
     }
 
 }
