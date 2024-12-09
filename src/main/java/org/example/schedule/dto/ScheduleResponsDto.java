@@ -9,15 +9,18 @@ import java.time.LocalDateTime;
 public class ScheduleResponsDto {
 
     private Long id;
-    private String authorname;
-    private String worktodo;
+    private String authorName;
+    private String workTodo;
     private String createdDateTime;
+    private String modifyDateTime;
 
     public ScheduleResponsDto(Schedule schedule) {
         this.id = schedule.getId();
-        this.authorname = schedule.getAuthorname();
-        this.worktodo = schedule.getWorktodo();
+        this.authorName = schedule.getAuthorName();
+        this.workTodo = schedule.getWorkTodo();
         this.createdDateTime = schedule.getCreatedDateTime();
+        this.modifyDateTime = schedule.getModifyDateTime();
+
     }
 
 }
