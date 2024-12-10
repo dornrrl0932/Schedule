@@ -3,6 +3,7 @@ package org.example.schedule.controller;
 import org.example.schedule.dto.ScheduleRequestDto;
 import org.example.schedule.dto.ScheduleResponsDto;
 import org.example.schedule.entity.Schedule;
+import org.example.schedule.service.ScheduleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,23 +17,23 @@ import java.util.*;
 @RequestMapping("/todos")
 public class ScheduleController {
 
-    private final Map<Long, Schedule> todoList = new HashMap<>();
+    private final ScheduleService scheduleService;
+
+    /*
+    scheduleService를 사용하기 위해서는 생성자 주입을 꼭 해야한다.
+     */
+    public ScheduleController(ScheduleService scheduleService) {
+        this.scheduleService = scheduleService;
+    }
 
 
     @PostMapping
     public ResponseEntity<ScheduleResponsDto> createtodo (@RequestBody ScheduleRequestDto requestDto) {
 
-        //id 생성
-        Long todoid = todoList.isEmpty() ? 1 : Collections.max(todoList.keySet()) + 1;
-
-        //Schecule 객체 생성
-        Schedule schedule = new Schedule(todoid,requestDto.getAuthorName(),requestDto.getWorkTodo(),requestDto.getPassword());
-
-        //todoList에 Schecule 넣어주기
-        todoList.put(todoid,schedule);
+        //scheduleService 호출하기
 
         //리턴
-        return new ResponseEntity<>(new ScheduleResponsDto(schedule), HttpStatus.CREATED);
+        return new ResponseEntity<>(scheduleService.saveTodo(requestDto), HttpStatus.CREATED);
 
     }
 
