@@ -41,7 +41,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
     전달받은 id값에 해당하는 할 일을 삭제
      */
     @Override
-    public void deleteTodo(Long id, Long password) {
+    public void deleteTodo(Long id) {
         todoList.remove(id);
     }
 }

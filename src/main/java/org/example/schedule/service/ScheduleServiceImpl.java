@@ -45,10 +45,11 @@ public class ScheduleServiceImpl implements ScheduleService{
 
         // NPE 방지
         if(schedule == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"id를 찾을 수 없습니다.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"id not found.");
         }
 
         return new ScheduleResponsDto(schedule);
+
     }
 
     @Override
@@ -58,17 +59,17 @@ public class ScheduleServiceImpl implements ScheduleService{
 
         //NPE 방지
         if (schedule == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"id를 찾을 수 없습니다.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"id not found.");
         }
 
         //필수값 검증(authorName, workTodo)
         if(authorName == null || workTodo == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"수정 할 내용을 작성해주세요.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Please write down what you want to revise.");
         }
 
         if(schedule.getPassword().equals(password)) {
             schedule.updateTodo(authorName,workTodo);
-        }
+        } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Password does not match.");
 
         return new ScheduleResponsDto(schedule);
     }
@@ -81,11 +82,11 @@ public class ScheduleServiceImpl implements ScheduleService{
 
         //NPE 방지
         if (schedule == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"id를 찾을 수 없습니다.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"id not found.");
         }
 
         if(schedule.getPassword().equals(password)) {
             scheduleRepository.deleteTodo(id);
-        }
+        } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Password does not match.");
     }
 }
