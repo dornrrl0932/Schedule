@@ -9,4 +9,5 @@ public interface ScheduleService {
 
     ScheduleResponsDto findTodoId(Long id);
 
+    ScheduleResponsDto updateTodo(Long id, String authorName, String workTodo, Long Password);
 }

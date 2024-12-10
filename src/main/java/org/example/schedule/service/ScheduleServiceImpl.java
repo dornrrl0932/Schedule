@@ -50,4 +50,26 @@ public class ScheduleServiceImpl implements ScheduleService{
 
         return new ScheduleResponsDto(schedule);
     }
+
+    @Override
+    public ScheduleResponsDto updateTodo(Long id, String authorName, String workTodo, Long password) {
+        //id를 통해 todo 조회
+        Schedule schedule = scheduleRepository.findTodoid(id);
+
+        //NPE 방지
+        if (schedule == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"id를 찾을 수 없습니다.");
+        }
+
+        //필수값 검증(authorName, workTodo)
+        if(authorName == null || workTodo == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"수정 할 내용을 작성해주세요.");
+        }
+
+        if(schedule.getPassword().equals(password)) {
+            schedule.updateTodo(authorName,workTodo);
+        }
+
+        return new ScheduleResponsDto(schedule);
+    }
 }

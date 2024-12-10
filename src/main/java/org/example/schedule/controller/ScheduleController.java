@@ -46,25 +46,10 @@ public class ScheduleController {
 
     //작성자, 할 일 수정, 비밀번호 비교 필요/수정 시 수정일 표시
     @PatchMapping("id/{id}")
-        public ResponseEntity<ScheduleResponsDto> updateTodo(@PathVariable Long id ,@RequestBody ScheduleRequestDto dto) {
+        public ResponseEntity<ScheduleResponsDto> updateTodo(@PathVariable Long id ,@RequestBody ScheduleRequestDto requestDto) {
 
-        Schedule schedule = todoList.get(id);
-
-        //NPE 방지
-        if (schedule == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        //필수값 검증(authorName, workTodo)
-        if(dto.getAuthorName() == null || dto.getWorkTodo() == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        if(schedule.getPassword().equals(dto.getPassword())) {
-            schedule.updateTodo(dto);
-        }
-
-        return new ResponseEntity<>(new ScheduleResponsDto(schedule), HttpStatus.CREATED);
+        //scheduleService 호출하기, 응답
+        return new ResponseEntity<>(scheduleService.updateTodo(id, requestDto.getAuthorName(), requestDto.getWorkTodo(),requestDto.getPassword()), HttpStatus.CREATED);
     }
 
     //삭제, 비밀번호 비교 필요
