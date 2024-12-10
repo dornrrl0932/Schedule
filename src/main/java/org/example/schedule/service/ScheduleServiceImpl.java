@@ -72,4 +72,20 @@ public class ScheduleServiceImpl implements ScheduleService{
 
         return new ScheduleResponsDto(schedule);
     }
+
+    @Override
+    public void deleteTodo(Long id, Long password) {
+
+        //id를 통해 todo 조회
+        Schedule schedule = scheduleRepository.findTodoid(id);
+
+        //NPE 방지
+        if (schedule == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"id를 찾을 수 없습니다.");
+        }
+
+        if(schedule.getPassword().equals(password)) {
+            scheduleRepository.deleteTodo(id);
+        }
+    }
 }

@@ -8,4 +8,6 @@ public interface ScheduleRepository {
 
     Schedule findTodoid(Long id);
 
+    void deleteTodo(Long id);
+
 }

@@ -54,14 +54,11 @@ public class ScheduleController {
 
     //삭제, 비밀번호 비교 필요
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTodo (@PathVariable Long id, @RequestBody ScheduleRequestDto dto) {
+    public ResponseEntity<Void> deleteTodo (@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
 
-        Schedule schedule = todoList.get(id);
+        scheduleService.deleteTodo(id,requestDto.getPassword());
 
-        if(schedule.getPassword().equals(dto.getPassword())) {
-            todoList.remove(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

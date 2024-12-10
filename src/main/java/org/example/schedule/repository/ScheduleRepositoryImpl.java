@@ -29,9 +29,19 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
         return schedule;
     }
 
+    /*
+    전달받은 id값에 해당하는 할 일은 반환
+     */
     @Override
     public Schedule findTodoid(Long id) {
-        //key값에 해당하는 할 일을 반환
         return todoList.get(id);
+    }
+
+    /*
+    전달받은 id값에 해당하는 할 일을 삭제
+     */
+    @Override
+    public void deleteTodo(Long id, Long password) {
+        todoList.remove(id);
     }
 }
