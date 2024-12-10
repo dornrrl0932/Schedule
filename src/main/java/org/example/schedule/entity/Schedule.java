@@ -26,19 +26,8 @@ public class Schedule {
         this.authorName = authorName;
         this.workTodo = workTodo;
         this.password = password;
-    }
-
-
-    public Schedule(Long id, String authorName, String workTodo, Long password) {
-
-        String dateTimeNow = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
-        this.id = id;
-        this.authorName = authorName;
-        this.workTodo = workTodo;
-        this.password = password;
-        this.createdDateTime = dateTimeNow;
-        this.modifyDateTime = dateTimeNow;
+        this.createdDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.modifyDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
 
