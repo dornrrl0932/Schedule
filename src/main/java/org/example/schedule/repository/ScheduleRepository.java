@@ -6,4 +6,6 @@ public interface ScheduleRepository {
 
     Schedule seveTodo(Schedule schedule);
 
+    Schedule findTodoid(Long id);
+
 }

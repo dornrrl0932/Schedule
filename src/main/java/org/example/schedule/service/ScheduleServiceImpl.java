@@ -4,7 +4,10 @@ import org.example.schedule.dto.ScheduleRequestDto;
 import org.example.schedule.dto.ScheduleResponsDto;
 import org.example.schedule.entity.Schedule;
 import org.example.schedule.repository.ScheduleRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 /*
 ScheduleService를 구현한 구현체
@@ -18,6 +21,7 @@ public class ScheduleServiceImpl implements ScheduleService{
         this.scheduleRepository = scheduleRepository;
     }
 
+
     @Override
     public ScheduleResponsDto saveTodo(ScheduleRequestDto requestDto) {
 
@@ -28,5 +32,22 @@ public class ScheduleServiceImpl implements ScheduleService{
         Schedule savedTodo = scheduleRepository.seveTodo(schedule);
 
         return new ScheduleResponsDto(savedTodo);
+    }
+
+    /*
+
+     */
+    @Override
+    public ScheduleResponsDto findTodoId(Long id) {
+
+        //id를 통해 할일을 반환
+        Schedule schedule = scheduleRepository.findTodoid(id);
+
+        // NPE 방지
+        if(schedule == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"id를 찾을 수 없습니다.");
+        }
+
+        return new ScheduleResponsDto(schedule);
     }
 }

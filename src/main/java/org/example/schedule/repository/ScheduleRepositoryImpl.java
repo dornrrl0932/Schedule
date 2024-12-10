@@ -28,4 +28,10 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
 
         return schedule;
     }
+
+    @Override
+    public Schedule findTodoid(Long id) {
+        //key값에 해당하는 할 일을 반환
+        return todoList.get(id);
+    }
 }

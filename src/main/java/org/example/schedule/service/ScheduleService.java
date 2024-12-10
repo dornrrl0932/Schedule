@@ -7,4 +7,6 @@ public interface ScheduleService {
 
     ScheduleResponsDto saveTodo(ScheduleRequestDto requestDto);
 
+    ScheduleResponsDto findTodoId(Long id);
+
 }

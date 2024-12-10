@@ -30,11 +30,8 @@ public class ScheduleController {
     @PostMapping
     public ResponseEntity<ScheduleResponsDto> createtodo (@RequestBody ScheduleRequestDto requestDto) {
 
-        //scheduleService 호출하기
-
-        //리턴
+        //scheduleService 호출하기, 응답
         return new ResponseEntity<>(scheduleService.saveTodo(requestDto), HttpStatus.CREATED);
-
     }
 
 
@@ -42,16 +39,8 @@ public class ScheduleController {
     @GetMapping("/{id}")
     public ResponseEntity<ScheduleResponsDto> lookupTodoId (@PathVariable Long id) {
 
-        //받아온 id로 todo 조회
-        Schedule schedule = todoList.get(id);
-
-        // NPE 방지
-        if(schedule == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        //리턴
-        return new ResponseEntity<>(new ScheduleResponsDto(schedule), HttpStatus.CREATED);
+        //scheduleService 호출하기, 응답
+        return new ResponseEntity<>(scheduleService.findTodoId(id), HttpStatus.CREATED);
     }
 
 
